@@ -1,0 +1,32 @@
+package main
+
+import (
+	"io/ioutil"
+	"net/http"
+)
+
+// OnRequest endpoint for component
+func OnRequest(w http.ResponseWriter, r *http.Request) {
+	if _, ok := r.URL.Query()["template"]; ok {
+		content, err := ioutil.ReadFile("./plugins/{{ .Name }}/template.html")
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+
+		w.Header().Set("Content-Type", "text/html")
+		w.WriteHeader(200)
+		w.Write(content)
+		return
+	}
+
+	dat, err := ioutil.ReadFile("./plugins/{{ .Name }}/body.js")
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/javascript")
+	w.WriteHeader(200)
+	w.Write(dat)
+}
