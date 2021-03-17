@@ -2,3 +2,4 @@
 ./public
 ./plugins
 ./microfrontend
+*.so

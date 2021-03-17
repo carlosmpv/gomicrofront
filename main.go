@@ -63,6 +63,11 @@ func serve() {
 		log.Fatal(err)
 	}
 
+	initFunc, err := entry.Lookup("Init")
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	routerFunc, err := entry.Lookup("Router")
 	if err != nil {
 		log.Fatal(err)
@@ -92,6 +97,8 @@ func serve() {
 			mux.ServeHTTP(w, r)
 		}),
 	}
+
+	initFunc.(func())()
 	log.Fatal(server.ListenAndServe())
 }
 
