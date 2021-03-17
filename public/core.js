@@ -9,6 +9,6 @@ customElements.define('core-plugin-slot', class extends HTMLElement {
             .then(r => r.text())
             .then(script => eval(script))
             .then(() => this.innerHTML = `<plugin-${name} />`)
-            .catch(console.error);
+            .catch(console.log);
     }
 });

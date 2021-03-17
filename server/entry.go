@@ -1,8 +1,14 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 )
+
+// Init called right befor server start
+func Init() {
+	fmt.Println("Ola mundo!")
+}
 
 // Router define api routes
 func Router(mux *http.ServeMux) {
