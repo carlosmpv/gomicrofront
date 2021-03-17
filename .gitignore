@@ -1,5 +1,5 @@
-./server
-./public
-./plugins
-./microfrontend
+server/
+public/
+plugins/
+microfrontend
 *.so
